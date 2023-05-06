@@ -1,17 +1,20 @@
 const express = require('express')
 const router = express.Router()
-const candidateController = require('../controllers/candidate.controllers')
+const voterController = require('../controllers/voter.controllers')
 
-// create a new candidate
-router.post('/new/candidate', candidateController.create);
+// create a new voter
+router.post('/voters', voterController.create);
 
-// Retrieve a single candidate with id
-router.get('/candidates/:id', candidateController.findOne);
+// Retrieve a single voter with id
+router.get('/voters/:id', voterController.findOne);
 
-// Update a candidate with id
-router.put('/candidates/:id', candidateController.update);
+// Update a voter with id
+router.put('/voters/:id', voterController.update);
 
-// Delete a candidate with id
-router.delete('/candidates/:id', candidateController.delete);
+// Delete a voter with id
+router.delete('/voters/:id', voterController.delete);
+
+router.post('/voters/vote', voterController.vote);
+
 
 module.exports = router

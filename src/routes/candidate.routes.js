@@ -3,7 +3,7 @@ const router = express.Router()
 const candidateController = require('../controllers/candidate.controllers')
 
 // create a new candidate
-router.post('/new/candidate', candidateController.create);
+router.post('/candidates', candidateController.create);
 
 // Retrieve a single candidate with id
 router.get('/candidates/:id', candidateController.findOne);

@@ -34,10 +34,20 @@ app.get('/', (req, res) => {
     res.json({"message": "Hello World"});
 });
 
-// Require Users routes
+// Require User routes
 const userRoutes = require('./src/routes/user.routes')
+
+// Require Candidate routes
+const candidateRoutes = require('./src/routes/candidate.routes')
+
+// Require Voter routes
+const voterRoutes = require('./src/routes/voter.routes')
+
+
 // using as middleware
 app.use('/api', userRoutes)
+app.use('/api', candidateRoutes)
+app.use('/api', voterRoutes)
 
 // listen for requests
 app.listen(port, () => {

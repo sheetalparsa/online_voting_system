@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
 const CandidateSchema = mongoose.Schema({
-    c_id: String,
-    username: String,
+    full_name: String,
+    email: String,
+    phone: String,
+    position: String,
+    election_symbol: String,
     password: String,
-    contact_number: Number,
-    designation: String
+    vote_count: Number,
 }, {
     timestamps: true
 });

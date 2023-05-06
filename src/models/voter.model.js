@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
 const VoterSchema = mongoose.Schema({
-    v_id: String,
-    username: String,
+    full_name: String,
+    email: String,
     password: String,
-    contact_number: Number,
-}, {
+    phone: String,
+    status: Boolean
+},{
     timestamps: true
 });
 
