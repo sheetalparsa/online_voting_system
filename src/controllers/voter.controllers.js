@@ -24,8 +24,7 @@ exports.create = (req, res) => {
 
   // Create a new User
   const voter = new Voter({
-    v_id: req.body.id,
-    full_name: req.body.first_name,
+    full_name: req.body.full_name,
     email: req.body.email,
     password: req.body.password,
     phone: req.body.phone,
@@ -76,8 +75,7 @@ exports.update = (req, res) => {
 
   // Find user and update it with the request body
   Voter.findByIdAndUpdate(req.params.id, {
-    v_id: req.body.v_id,
-    full_name: req.body.first_name,
+    full_name: req.body.full_name,
     email: req.body.email,
     password: req.body.password,
     phone: req.body.phone,
@@ -127,8 +125,8 @@ exports.delete = (req, res) => {
 
 exports.vote = async (req, res) => {
   try {
-    const candidate_id = req.body.c_id
-    const voter_id = req.body.v_id
+    const candidate_id = req.body._id
+    const voter_id = req.body._id
     const candidate = await Candidate.findById(candidate_id)
     const voter = await Voter.findById(voter_id)
 

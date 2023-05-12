@@ -1,18 +1,18 @@
-const User = require('../models/.model.js');
+const Admin = require('../models/admin.model.js');
 
-// Retrieve and return all users from the database.
+// Retrieve and return all admins from the database.
 exports.findAll = (req, res) => {
-    User.find()
-    .then(users => {
-        res.send(users);
+    Admin.find()
+    .then(admins => {
+        res.send(admins);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Something went wrong while getting list of users."
+            message: err.message || "Something went wrong while getting list of admins."
         });
     });
 };
 
-// Create and Save a new User
+// Create and Save a new admin
 exports.create = (req, res) => {
     // Validate request
     if(!req.body) {
@@ -21,48 +21,46 @@ exports.create = (req, res) => {
         });
     }
 
-    // Create a new User
-    const user = new User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.last_name,
-        phone: req.body.last_name
+    // Create a new admin
+    const admin = new Admin({
+        adminname: req.body.first_name,
+        password: req.body.last_name
     });
 
-    // Save user in the database
-    user.save()
+    // Save admin in the database
+    admin.save()
     .then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Something went wrong while creating new user."
+            message: err.message || "Something went wrong while creating new admin."
         });
     });
 };
 
-// Find a single User with a id
+// Find a single admin with a id
 exports.findOne = (req, res) => {
-    User.findById(req.params.id)
-    .then(user => {
-        if(!user) {
+    Admin.findById(req.params.id)
+    .then(admin => {
+        if(!admin) {
             return res.status(404).send({
-                message: "User not found with id " + req.params.id
+                message: "admin not found with id " + req.params.id
             });
         }
-        res.send(user);
+        res.send(admin);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "User not found with id " + req.params.id
+                message: "admin not found with id " + req.params.id
             });
         }
         return res.status(500).send({
-            message: "Error getting user with id " + req.params.id
+            message: "Error getting admin with id " + req.params.id
         });
     });
 };
 
-// Update a User identified by the id in the request
+// Update a admin identified by the id in the request
 exports.update = (req, res) => {
     // Validate Request
     if(!req.body) {
@@ -71,50 +69,48 @@ exports.update = (req, res) => {
         });
     }
 
-    // Find user and update it with the request body
-    User.findByIdAndUpdate(req.params.id, {
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.last_name,
-        phone: req.body.last_name
+    // Find admin and update it with the request body
+    Admin.findByIdAndUpdate(req.params.id, {
+        adminname: req.body.first_name,
+        password: req.body.last_name
     }, {new: true})
-    .then(user => {
-        if(!user) {
+    .then(admin => {
+        if(!admin) {
             return res.status(404).send({
-                message: "user not found with id " + req.params.id
+                message: "admin not found with id " + req.params.id
             });
         }
-        res.send(user);
+        res.send(admin);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "user not found with id " + req.params.id
+                message: "admin not found with id " + req.params.id
             });
         }
         return res.status(500).send({
-            message: "Error updating user with id " + req.params.id
+            message: "Error updating admin with id " + req.params.id
         });
     });
 };
 
-// Delete a User with the specified id in the request
+// Delete a admin with the specified id in the request
 exports.delete = (req, res) => {
-    User.findByIdAndRemove(req.params.id)
-    .then(user => {
-        if(!user) {
+    Admin.findByIdAndRemove(req.params.id)
+    .then(admin => {
+        if(!admin) {
             return res.status(404).send({
-                message: "user not found with id " + req.params.id
+                message: "admin not found with id " + req.params.id
             });
         }
-        res.send({message: "user deleted successfully!"});
+        res.send({message: "admin deleted successfully!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "user not found with id " + req.params.id
+                message: "admin not found with id " + req.params.id
             });
         }
         return res.status(500).send({
-            message: "Could not delete user with id " + req.params.id
+            message: "Could not delete admin with id " + req.params.id
         });
     });
 };
