@@ -20,5 +20,9 @@ router.delete('/voters/:id', voterController.delete);
 // vote a candidate
 router.post('/voters/vote', voterController.vote);
 
+router.post('/voter/:id/generate_otp', voterController.generate_otp)
+
+router.get('/voter/:id/verify_otp', voterController.verify_otp )
+
 
 module.exports = router

@@ -1,5 +1,7 @@
+const axios = require('axios').default;
 const Voter = require('../models/voter.model.js');
 const Candidate = require('../models/candidate.model.js');
+const { apikey } = require('../../config/api.config.js');
 
 // Retrieve and return all users from the database.
 exports.findAll = (req, res) => {
@@ -181,5 +183,33 @@ exports.vote = async (req, res) => {
     return res.status(400).send({
       message: "Error" + error
     });
+  }
+}
+
+exports.generate_otp = async (req, res) => {
+
+    try{
+      const voter = await Voter.findById(req.params.id)
+      const phone = voter.phone;
+      let otp = await axios.get(`https://2factor.in/API/V1/${apikey}/SMS/${phone}/AUTOGEN/`);
+      return res.status(200).send(otp.data)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+exports.verify_otp = async (req, res) => {
+  console.log(req)
+  try{
+    const user_otp = req.query.otp;
+    const session_id = req.query.session_id
+    let is_verify = await axios.get(`https://2factor.in/API/V1/${apikey}/SMS/VERIFY/${session_id}/${user_otp}`)
+    return res.status(200).send({
+      message: "OTP verified"
+    })
+  }catch(error) {
+    return res.status(400).send({
+      message: "OTP mismatched"
+    })
   }
 }
