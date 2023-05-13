@@ -46,11 +46,16 @@ const candidateRoutes = require('./src/routes/candidate.routes')
 // Require Voter routes
 const voterRoutes = require('./src/routes/voter.routes')
 
+// Require Admin routes
+const adminRoutes = require('./src/routes/admin.routes')
+
 
 // using as middleware
 app.use('/api', userRoutes)
 app.use('/api', candidateRoutes)
 app.use('/api', voterRoutes)
+app.use('/api', adminRoutes)
+
 
 // listen for requests
 app.listen(port, () => {

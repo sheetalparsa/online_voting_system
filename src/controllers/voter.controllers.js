@@ -127,8 +127,8 @@ exports.delete = (req, res) => {
 
 exports.vote = async (req, res) => {
   try {
-    const candidate_id = req.body._id
-    const voter_id = req.body._id
+    const candidate_id = req.body.c_id
+    const voter_id = req.body.v_id
     const candidate = await Candidate.findById(candidate_id)
     const voter = await Voter.findById(voter_id)
 

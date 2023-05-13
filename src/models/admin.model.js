@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const AdminSchema = mongoose.Schema({
-    username: String,
-    password: String,
-
+    email: String,
+    password: String
 }, {
     timestamps: true
 });
